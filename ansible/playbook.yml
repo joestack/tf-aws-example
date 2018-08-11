@@ -13,12 +13,6 @@
       dest: /usr/share/nginx/html/index.html
     notify:
     - restart nginx
-#  - name: copy nginx index.html
-#    copy:
-#      src: index.html
-#      dest: /usr/share/nginx/html/index.html
-#    notify:
-#    - restart nginx
   - name: ensure nginx is running
     service:
       name: nginx
