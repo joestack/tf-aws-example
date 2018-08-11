@@ -420,3 +420,13 @@ resource "aws_instance" "webnodes" {
 
 }
 
+
+resource "null_resource" "ansible_run" {
+  depends_on = ["local_file.ansible_inventory","aws_internet_gateway.igw","aws_eip.nat","aws_route_table_association.rtb-web"]
+
+  provisioner "local-exec" {
+    command     = "sleep 60 && ansible-playbook -i inventory playbook.yml --private-key ${var.private_key_path}"
+    working_dir = "${path.module}/ansible/"
+  }
+
+}
